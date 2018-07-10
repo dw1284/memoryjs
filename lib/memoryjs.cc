@@ -337,7 +337,7 @@ void readMemory(const FunctionCallbackInfo<Value>& args) {
 
   } else if (!strcmp(dataType, "int16")) {
 
-    int result = Memory.readMemory<__int16>(process::hProcess, args[0]->Uint32Value());
+    int result = Memory.readMemory<unsigned __int16>(process::hProcess, args[0]->Uint32Value());
     if (args.Length() == 3) argv[0] = Number::New(isolate, result);
     else args.GetReturnValue().Set(Number::New(isolate, result));
 
@@ -488,7 +488,7 @@ void writeMemory(const FunctionCallbackInfo<Value>& args) {
 
   } else if (!strcmp(dataType, "int16")) {
 
-    Memory.writeMemory<__int16>(process::hProcess, args[0]->Uint32Value(), args[1]->NumberValue());
+    Memory.writeMemory<unsigned __int16>(process::hProcess, args[0]->Uint32Value(), args[1]->NumberValue());
 
   } else if (!strcmp(dataType, "int32")) {
 
