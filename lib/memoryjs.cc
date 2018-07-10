@@ -329,6 +329,30 @@ void readMemory(const FunctionCallbackInfo<Value>& args) {
     if (args.Length() == 3) argv[0] = Number::New(isolate, result);
     else args.GetReturnValue().Set(Number::New(isolate, result));
 
+  } else if (!strcmp(dataType, "int8")) {
+
+    int result = Memory.readMemory<__int8>(process::hProcess, args[0]->Uint32Value());
+    if (args.Length() == 3) argv[0] = Number::New(isolate, result);
+    else args.GetReturnValue().Set(Number::New(isolate, result));
+
+  } else if (!strcmp(dataType, "int16")) {
+
+    int result = Memory.readMemory<__int16>(process::hProcess, args[0]->Uint32Value());
+    if (args.Length() == 3) argv[0] = Number::New(isolate, result);
+    else args.GetReturnValue().Set(Number::New(isolate, result));
+
+  } else if (!strcmp(dataType, "int32")) {
+
+    int result = Memory.readMemory<__int32>(process::hProcess, args[0]->Uint32Value());
+    if (args.Length() == 3) argv[0] = Number::New(isolate, result);
+    else args.GetReturnValue().Set(Number::New(isolate, result));
+
+  } else if (!strcmp(dataType, "int64")) {
+
+    int result = Memory.readMemory<__int64>(process::hProcess, args[0]->Uint32Value());
+    if (args.Length() == 3) argv[0] = Number::New(isolate, result);
+    else args.GetReturnValue().Set(Number::New(isolate, result));
+
   } else if (!strcmp(dataType, "dword")) {
 
     DWORD result = Memory.readMemory<DWORD>(process::hProcess, args[0]->Uint32Value());
@@ -457,6 +481,22 @@ void writeMemory(const FunctionCallbackInfo<Value>& args) {
   if (!strcmp(dataType, "int")) {
 
     Memory.writeMemory<int>(process::hProcess, args[0]->Uint32Value(), args[1]->NumberValue());
+
+  } else if (!strcmp(dataType, "int8")) {
+
+    Memory.writeMemory<__int8>(process::hProcess, args[0]->Uint32Value(), args[1]->NumberValue());
+
+  } else if (!strcmp(dataType, "int16")) {
+
+    Memory.writeMemory<__int16>(process::hProcess, args[0]->Uint32Value(), args[1]->NumberValue());
+
+  } else if (!strcmp(dataType, "int32")) {
+
+    Memory.writeMemory<__int32>(process::hProcess, args[0]->Uint32Value(), args[1]->NumberValue());
+
+  } else if (!strcmp(dataType, "int64")) {
+
+    Memory.writeMemory<__int64>(process::hProcess, args[0]->Uint32Value(), args[1]->NumberValue());
 
   } else if (!strcmp(dataType, "dword")) {
 
