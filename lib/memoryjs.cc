@@ -389,16 +389,15 @@ void readMemory(const FunctionCallbackInfo<Value>& args) {
     int offset = 0x0;
     while (true) {
       char c = Memory.readMemoryChar(process::hProcess, args[0]->IntegerValue() + offset);
+      
+      if (c == '\0') {
+        c = ' ';
+      }
+      
       chars.push_back(c);
 
-      // break at 1 million chars
-      if (offset == (sizeof(char) * 1000000)) {
-        chars.clear();
-        break;
-      }
-
-      // break at terminator
-      if (c == '\0') {
+      // break at 32 chars
+      if (offset == (sizeof(char) * 32)) {
         break;
       }
 
@@ -411,6 +410,8 @@ void readMemory(const FunctionCallbackInfo<Value>& args) {
     } else {
       // vector -> string
       std::string str(chars.begin(), chars.end());
+
+      // printf(str.c_str());
 
       if (args.Length() == 3) argv[0] = String::NewFromUtf8(isolate, str.c_str());
       else args.GetReturnValue().Set(String::NewFromUtf8(isolate, str.c_str()));
